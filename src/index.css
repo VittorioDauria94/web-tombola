@@ -1,0 +1,80 @@
+body {
+  background-color: #18a495;
+  font-family: "Gochi Hand", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.vd-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.vd-numbers {
+  height: 42px;
+  width: 42px;
+  background-color: white;
+  color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  font-weight: bold;
+  box-shadow:
+    -4px 6px 0 rgba(0, 0, 0, 0.35),
+    -6px 8px 10px rgba(0, 0, 0, 0.25);
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vd-numbers:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 10px rgba(0, 0, 0, 0.25),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.vd-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 12px;
+  justify-items: center;
+}
+
+.vd-numbers:nth-child(10n + 5) {
+  margin-right: 20px;
+}
+
+.vd-numbers:nth-child(n + 21):nth-child(-n + 30),
+.vd-numbers:nth-child(n + 51):nth-child(-n + 60) {
+  margin-bottom: 20px;
+}
+
+.vd-extract-number {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  border-radius: 12px;
+
+}
+
+.vd-extracted {
+  background-color: #ffeb3b;
+  color: #111;
+  transform: translate(2px, -2px);
+}
+
+/* Tablet / mobile */
+@media (max-width: 768px) {
+  .vd-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
