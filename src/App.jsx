@@ -5,6 +5,23 @@ function App() {
   const [numbers, setNumbers] = useState(generateNumbers());
   const [extractNumber, setExtractNumber] = useState("");
   const [isShaking, setIsShaking] = useState(false);
+  const [pot, setPot] = useState(0);
+
+  const prizeSplit = {
+    ambo: 0.05,
+    terna: 0.15,
+    quaterna: 0.2,
+    cinquina: 0.25,
+    tombola: 0.35,
+  };
+
+  const prizes = {
+    ambo: pot * prizeSplit.ambo,
+    terna: pot * prizeSplit.terna,
+    quaterna: pot * prizeSplit.quaterna,
+    cinquina: pot * prizeSplit.cinquina,
+    tombola: pot * prizeSplit.tombola,
+  };
 
   function extractRandomNumber() {
     const availableNumbers = numbers.filter((n) => !n.extracted);
@@ -76,6 +93,43 @@ function App() {
             <button className="btn btn-danger" onClick={resetGame}>
               Termina Gioco
             </button>
+          </div>
+        </div>
+        <div className="vd-prize-box my-5">
+          <h4 className="mb-3">Montepremi & Premi</h4>
+
+          <div className="mb-3">
+            <label className="form-label">Montepremi totale (€)</label>
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              value={pot}
+              onChange={(e) => setPot(Number(e.target.value))}
+            />
+          </div>
+
+          <div className="vd-prizes">
+            <div className="vd-prize-row">
+              <span>Ambo (5%)</span>
+              <strong>€ {prizes.ambo.toFixed(2)}</strong>
+            </div>
+            <div className="vd-prize-row">
+              <span>Terna (15%)</span>
+              <strong>€ {prizes.terna.toFixed(2)}</strong>
+            </div>
+            <div className="vd-prize-row">
+              <span>Quaterna (20%)</span>
+              <strong>€ {prizes.quaterna.toFixed(2)}</strong>
+            </div>
+            <div className="vd-prize-row">
+              <span>Cinquina (25%)</span>
+              <strong>€ {prizes.cinquina.toFixed(2)}</strong>
+            </div>
+            <div className="vd-prize-row vd-prize-highlight">
+              <span>Tombola (35%)</span>
+              <strong>€ {prizes.tombola.toFixed(2)}</strong>
+            </div>
           </div>
         </div>
       </div>
