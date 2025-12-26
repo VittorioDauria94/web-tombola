@@ -4,6 +4,7 @@ import generateNumbers from "../components/generateNumber";
 function App() {
   const [numbers, setNumbers] = useState(generateNumbers());
   const [extractNumber, setExtractNumber] = useState("");
+  const [isShaking, setIsShaking] = useState(false);
 
   function extractRandomNumber() {
     const availableNumbers = numbers.filter((n) => !n.extracted);
@@ -13,16 +14,22 @@ function App() {
       return;
     }
 
-    const randomIndex = Math.floor(Math.random() * availableNumbers.length);
-    const selected = availableNumbers[randomIndex];
+    setIsShaking(true);
+    setExtractNumber("");
 
-    setExtractNumber(selected.value);
+    setTimeout(() => {
+      const randomIndex = Math.floor(Math.random() * availableNumbers.length);
+      const selected = availableNumbers[randomIndex];
 
-    setNumbers((prev) =>
-      prev.map((n) =>
-        n.value === selected.value ? { ...n, extracted: true } : n
-      )
-    );
+      setExtractNumber(selected.value);
+
+      setNumbers((prev) =>
+        prev.map((n) =>
+          n.value === selected.value ? { ...n, extracted: true } : n
+        )
+      );
+      setIsShaking(false);
+    }, 1200); // suspense (1.2s)
   }
 
   function resetGame() {
@@ -53,7 +60,13 @@ function App() {
           </div>
           <div className="col-lg-4 col-12 d-flex flex-column align-items-center">
             <h5>Ultimo numero estratto</h5>
-            <div className="vd-extract-number my-3">{extractNumber}</div>
+            <div
+              className={`vd-extract-number my-3 ${
+                isShaking ? "vd-shake" : ""
+              }`}
+            >
+              {extractNumber || "—"}
+            </div>
             <button
               className="btn btn-warning mb-3"
               onClick={extractRandomNumber}
