@@ -25,6 +25,11 @@ function App() {
     );
   }
 
+  function resetGame() {
+    setNumbers(generateNumbers());
+    setExtractNumber("");
+  }
+
   return (
     <>
       <div className="container d-flex justify-content-center align-items-center">
@@ -49,8 +54,14 @@ function App() {
           <div className="col-lg-4 col-12 d-flex flex-column align-items-center">
             <h5>Ultimo numero estratto</h5>
             <div className="vd-extract-number my-3">{extractNumber}</div>
-            <button className="btn btn-light" onClick={extractRandomNumber}>
-              Estrai numero
+            <button
+              className="btn btn-warning mb-3"
+              onClick={extractRandomNumber}
+            >
+              Estrai
+            </button>
+            <button className="btn btn-danger" onClick={resetGame}>
+              Termina Gioco
             </button>
           </div>
         </div>
